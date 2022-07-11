@@ -1,0 +1,26 @@
+import java.util.*;
+
+/* debugging: test worst case (in this problem, 100)*/
+
+public class Main{
+    public static void main(String[] ags){
+        Scanner s = new Scanner(System.in);
+        int n =s.nextInt();
+        int leng=5;
+        long[] value = new long[101];
+        
+        value[0] = 1; value[1] = 1; value[2] = 1; value[3] = 2; value[4] = 2; 
+        
+        for(int i=0; i<n; i++){
+            int a = s.nextInt();
+            if(a>leng){
+                for(int j=leng; j<a; j++){
+                    value[j]=value[j-1] + value[j-5];
+                    leng++;
+                }  
+            }
+            System.out.println(value[a-1]);
+        }
+        
+    }
+}
