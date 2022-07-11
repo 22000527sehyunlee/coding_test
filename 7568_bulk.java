@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+/* Runtime arror: reduce for loop, Do not use a separate class, just did in main class */
 public class Main{
     public static void main(String[] args){
         Scanner s = new Scanner(System.in);
