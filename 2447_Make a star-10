@@ -1,0 +1,67 @@
+import java.util.*;
+// compile error : class name Main -> baekjoon(in vscode file name), additional string("type the number") //
+public class Main{
+    private static String[][] pattern;
+
+    public static void main(String[] args){
+        Scanner s = new Scanner(System.in);
+        //System.out.println("type the bumber");
+        int a = s.nextInt(); //27
+
+        pattern = new String[a][a]; //pattern [27][27]
+        StringBuffer sb = new StringBuffer();  // StringBuffer  sb 
+        
+
+        recur(0,0,a,false,a); //27
+
+        int i,j;
+
+        for(i=0; i< a; i++){
+            for (j=0; j<a; j++){ 
+            //System.out.print(pattern[i][j]);
+                sb.append(pattern[i][j]);
+            }
+            //System.out.println();
+            sb.append("\n");
+        }
+        System.out.print(sb.toString());
+        s.close();
+    }
+    static void recur(int x, int y, int a, boolean blank,int staticNum){  //27
+        int n = a/3;
+        int i,j;
+
+        if (!blank){
+            if (n==1){ // draw 3*3 pattern
+                for(i=x; i< x+3; i++){
+                    for (j=y; j<y+3; j++){ 
+                        if(i ==x+n && j == y+n) pattern[i][j] = " ";
+                        else pattern[i][j] = "*";
+                        if(i == staticNum-1 && j == staticNum-1) return;
+                        // System.out.println("1");
+                    }
+                }
+                // System.out.printf("%d %d %d\n", x,y,a);
+                return;
+            } else if(a==1){
+                pattern[x][y] = "*";
+            }
+            else { // do recursive 
+                for(i=x; i< x+a; i+=n){
+                    for (j=y; j<y+a; j+=n){ //check
+                        // System.out.printf("big1 %d %d %d\n", i,j, a);
+                        if(i ==x+n && j == y+n) recur(i,j,n,true, staticNum);
+                        else recur(i,j,n,false, staticNum);
+                    }
+                }
+            }
+        } else { // blank
+            for(i=x; i< x+a; i++){
+                for (j=y; j<y+a; j++){ 
+                    pattern[i][j] = " ";
+                }
+            }
+        }
+        return ;
+    }
+}
