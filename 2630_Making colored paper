@@ -1,0 +1,57 @@
+import java.util.*;
+
+public class Main{
+    static int b =0; //1
+    static int w =0; //0
+    static int[][] buf;
+    public static void main(String[] args){
+        Scanner s = new Scanner(System.in);
+        int a = s.nextInt();
+        buf = new int[a][a];
+        int i,j;
+
+        for (i=0; i< a; i++){
+            for (j=0; j<a; j++){
+                buf[i][j] = s.nextInt();
+            }
+        }
+        recur(a,0,0,buf[0][0]);
+        
+        System.out.printf("%d\n%d\n",w,b);
+        
+    }
+    
+    public static void recur(int n, int x, int y, int zeroOrOne){
+        int i=x,j=y;
+        
+        if(n == 1){
+        	// System.out.printf("n==1 : [%d] [%d] \n", i,j);
+            if (buf[i][j] == 0) w++; //white 
+            else b++;
+            return;
+        }
+        forout:
+        for(i=x; i<x+n; i++){
+            for (j=y; j<y+n; j++){
+                if(buf[i][j]!=zeroOrOne){
+                    break forout;
+                }
+            }
+        }
+        if(i != x+n || j != y+n){
+        	// System.out.printf("recur : [%d] [%d] \n", i,j);
+            for(int k=0; k<n; k+=n/2){            
+                for(int u=0; u<n; u+=n/2){            
+                    recur (n/2, x+k, y+u, buf[x+k][y+u]);
+                }
+            }
+                
+        }
+        else {
+        	// System.out.printf("[%d] [%d] \n", i,j);
+            if (buf[x][y] == 0) w++; //white 
+            else b++;
+            return ;
+        }
+    }
+}
