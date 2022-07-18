@@ -1,0 +1,22 @@
+import java.util.*;
+
+/*i didn't use Hash*/
+
+public class Main{
+    public static void main(String[] args){
+        HashSet<String> set = new HashSet<String>();
+        Scanner s = new Scanner(System.in);
+        String str = s.nextLine();
+        
+        int length = str.length(); // aaa 3
+
+        for(int a=0; a<length; a++){ //0. 1, 2
+            for (int b=0; b<=a; b++){ //0. 0 1. 0 1 2 
+                String t = str.substring(b, b+length-a);
+                set.add(t);
+            }
+        }
+        System.out.println(set.size());
+        s.close();
+    }
+}
