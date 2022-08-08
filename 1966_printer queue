@@ -1,0 +1,40 @@
+import java.util.*;
+
+public class Main{
+    public static void main(String[] args){
+        Scanner s = new Scanner(System.in);
+        int a,b,c;
+        a = s.nextInt();
+        
+        for (int i=0; i<a; i++){
+            LinkedList<int[]> q = new LinkedList<>();
+            int count=0;
+            b = s.nextInt(); // array number
+            c = s.nextInt(); // find num
+
+            for (int j = 0; j< b; j++) {
+				q.offer(new int[] {j, s.nextInt()});
+			}
+            
+            while (true) {
+				int first[] = q.poll();
+				boolean flag = true;
+				
+				for(int k = 0; k < q.size(); k++) {
+					if(q.get(k)[1] > first[1]) {
+						flag = false;
+						break;
+					}
+				}
+				
+				if(flag) {
+					count++;
+					if(first[0] == c) break;
+				} else {
+					q.add(first);
+				}
+			}
+            System.out.println(count);
+        }
+	}	
+}
